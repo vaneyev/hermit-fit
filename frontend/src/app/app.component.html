@@ -1,1 +1,9 @@
-<h1>{{ title }}</h1>
+<nz-layout>
+  <nz-content>
+    <nz-tree-select
+      style="width: 300px"
+      nzShowSearch
+      [nzNodes]="movementService.getMovementsTypes() | treeNodes">
+    </nz-tree-select>
+  </nz-content>
+</nz-layout>
