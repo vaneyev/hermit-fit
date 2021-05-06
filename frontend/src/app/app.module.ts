@@ -9,7 +9,6 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MovementService} from './movement.service';
-import {TreeNodesPipe} from './treeNodes.pipe';
 import {NgZorroModule} from './ng-zorro/ng-zorro.module';
 
 registerLocaleData(en);
@@ -17,7 +16,6 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
-    TreeNodesPipe
   ],
   imports: [
     BrowserModule,
