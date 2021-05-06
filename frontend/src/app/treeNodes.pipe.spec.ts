@@ -1,6 +1,6 @@
 import { TreeNodesPipe } from './treeNodes.pipe';
 
-describe('TreenodesPipe', () => {
+describe('TreeNodesPipe', () => {
   it('create an instance', () => {
     const pipe = new TreeNodesPipe();
     expect(pipe).toBeTruthy();
