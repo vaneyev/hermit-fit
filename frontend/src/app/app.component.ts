@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {MovementService} from './movement.service';
+import {Component, OnInit} from '@angular/core';
+import {Exercise, Movement, MovementService, WorkoutDay} from './movement.service';
 import {NzTreeNodeOptions} from 'ng-zorro-antd/tree';
 
 @Component({
@@ -7,14 +7,19 @@ import {NzTreeNodeOptions} from 'ng-zorro-antd/tree';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Hermit Fit';
   private movementService: MovementService;
   movementsTree: NzTreeNodeOptions[] = [];
+  exercises: Exercise[] = [];
 
   constructor(movementService: MovementService) {
     this.movementService = movementService;
+  }
+
+  ngOnInit(): void {
     this.movementsTree = this.getMovementsTree();
+    this.exercises = this.getExercises();
   }
 
   getMovementsTree(): NzTreeNodeOptions[] {
@@ -34,5 +39,17 @@ export class AppComponent {
             })
         };
       });
+  }
+
+  getMovement(key: string): Movement {
+    return this.movementService.getMovement(key);
+  }
+
+  getDate(id: string): WorkoutDay {
+    return this.movementService.getDate(id);
+  }
+
+  getExercises(): Exercise[] {
+    return this.movementService.getExercises();
   }
 }

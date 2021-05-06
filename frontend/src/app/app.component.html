@@ -1,9 +1,56 @@
 <nz-layout>
   <nz-content>
     <nz-tree-select
-      style="width: 300px"
+      style="width: 20em"
       nzShowSearch
+      nzVirtualHeight="30em"
       [nzNodes]="movementsTree">
     </nz-tree-select>
+    <nz-table [nzData]="exercises">
+      <thead>
+      <tr>
+        <th>
+          Date
+        </th>
+        <th>
+          Exercise
+        </th>
+        <th>
+          Set
+        </th>
+        <th>
+          Reps
+        </th>
+        <th>
+          Work
+        </th>
+        <th>
+          Comments
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let exercise of exercises">
+        <td>
+          {{ getDate(exercise.workoutDayId).date | date }}
+        </td>
+        <td>
+          {{ getMovement(exercise.movementId).title }}
+        </td>
+        <td>
+          {{ exercise.set }}
+        </td>
+        <td>
+          {{ exercise.reps }}
+        </td>
+        <td>
+          {{ exercise.isWork }}
+        </td>
+        <td>
+          {{ getDate(exercise.workoutDayId).comments }}
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
   </nz-content>
 </nz-layout>

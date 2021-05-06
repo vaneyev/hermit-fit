@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 
 import {MovementService} from './movement.service';
 
-describe('MovementServiceService', () => {
+describe('MovementService', () => {
   let service: MovementService;
 
   beforeEach(() => {

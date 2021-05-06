@@ -1,12 +1,5 @@
 import {Injectable} from '@angular/core';
 
-interface Movement {
-  readonly key: string;
-  readonly order: number;
-  readonly title: string;
-  readonly type: string;
-}
-
 interface MovementType {
   readonly key: string;
   readonly order: number;
@@ -14,15 +7,6 @@ interface MovementType {
 }
 
 export type MovementTypes = ReadonlyArray<MovementType>;
-
-interface Exercise {
-  readonly date: Date;
-  readonly movementId: string;
-  readonly isWork: boolean;
-  readonly sets: number;
-  readonly reps: number;
-  readonly comments: string;
-}
 
 const movementTypes: MovementTypes = [
   {
@@ -56,6 +40,13 @@ const movementTypes: MovementTypes = [
     title: 'Handstand pushups',
   },
 ];
+
+export interface Movement {
+  readonly key: string;
+  readonly order: number;
+  readonly title: string;
+  readonly type: string;
+}
 
 const movements: Movement[] = [
   {
@@ -420,6 +411,39 @@ const movements: Movement[] = [
   },
 ];
 
+export interface WorkoutDay {
+  id: string;
+  date: number;
+  comments: string;
+}
+
+const days = [
+  {
+    id: '',
+    date: Date.now(),
+    comments: ''
+  }
+];
+
+export interface Exercise {
+  id: string;
+  workoutDayId: string;
+  movementId: string;
+  isWork: boolean;
+  set: number;
+  reps: number;
+}
+
+const exercises: Exercise[] = [
+  {
+    id: '8a5fe771-20fb-4e48-b9ae-7bfbd78ebf00',
+    workoutDayId: '',
+    movementId: 'b6a9e455-a286-4ba1-8355-1c4bbfadc716',
+    isWork: true,
+    set: 1,
+    reps: 2,
+  }
+];
 
 @Injectable({
   providedIn: 'root'
@@ -430,11 +454,19 @@ export class MovementService {
     return movementTypes;
   }
 
+  getMovement(key: string): Movement {
+    return movements.find((value) => value.key === key);
+  }
+
   getMovements(type: string): Movement[] {
     return movements.filter(value => value.type === type);
   }
 
-  getExercises(): readonly Exercise[] {
-    return null;
+  getDate(id: string): WorkoutDay {
+    return JSON.parse(JSON.stringify(days.find((value => value.id === id))));
+  }
+
+  getExercises(): Exercise[] {
+    return JSON.parse(JSON.stringify(exercises));
   }
 }
