@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Exercise, Movement, MovementService, WorkoutDay} from './movement.service';
+import {Exercise, Movement, MovementService} from './movement.service';
 import {NzTreeNodeOptions} from 'ng-zorro-antd/tree';
 
 @Component({
@@ -44,15 +44,6 @@ export class AppComponent implements OnInit {
   getMovement(key: string): Movement {
     return this.movementService.getMovement(key);
   }
-
-  getDate(id: string): WorkoutDay {
-    return this.movementService.getWorkoutDay(id);
-  }
-
-  getExercises(date: Date): Exercise[] {
-    return this.movementService.getExercises(date);
-  }
-
   hasExercise(date: Date): boolean {
     return this.movementService.getDaysInMonth(date).some(value => value.date.getDate() === date.getDate());
   }
