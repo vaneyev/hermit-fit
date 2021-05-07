@@ -1,6 +1,8 @@
 import {TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {NgZorroModule} from './ng-zorro/ng-zorro.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {en_US, NZ_I18N} from 'ng-zorro-antd/i18n';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -9,7 +11,11 @@ describe('AppComponent', () => {
         AppComponent,
       ],
       imports: [
+        BrowserAnimationsModule,
         NgZorroModule
+      ],
+      providers: [
+        {provide: NZ_I18N, useValue: en_US}
       ]
     }).compileComponents();
   });

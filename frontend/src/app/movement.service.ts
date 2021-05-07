@@ -413,14 +413,14 @@ const movements: Movement[] = [
 
 export interface WorkoutDay {
   id: string;
-  date: number;
+  date: Date;
   comments: string;
 }
 
-const days = [
+const days: WorkoutDay[] = [
   {
     id: '',
-    date: Date.now(),
+    date: new Date(2021, 4, 1),
     comments: ''
   }
 ];
@@ -462,11 +462,21 @@ export class MovementService {
     return movements.filter(value => value.type === type);
   }
 
-  getDate(id: string): WorkoutDay {
-    return JSON.parse(JSON.stringify(days.find((value => value.id === id))));
+  getWorkoutDay(id: string): WorkoutDay {
+    return days.find((value => value.id === id));
   }
 
-  getExercises(): Exercise[] {
-    return JSON.parse(JSON.stringify(exercises));
+  getDaysInMonth(date: Date): WorkoutDay[] {
+    return days.filter(value =>
+      value.date.getFullYear() === date.getFullYear() && value.date.getMonth() === date.getMonth());
+  }
+
+  getExercises(date: Date): Exercise[] {
+    return JSON.parse(JSON.stringify(exercises.filter(exercise => {
+      const workoutDate = this.getWorkoutDay(exercise.workoutDayId).date;
+      return workoutDate.getFullYear() === date.getFullYear() &&
+        workoutDate.getMonth() === date.getMonth() &&
+        workoutDate.getDate() === date.getDate();
+    })));
   }
 }

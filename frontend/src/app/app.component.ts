@@ -8,6 +8,7 @@ import {NzTreeNodeOptions} from 'ng-zorro-antd/tree';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  date: Date;
   title = 'Hermit Fit';
   private movementService: MovementService;
   movementsTree: NzTreeNodeOptions[] = [];
@@ -19,7 +20,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.movementsTree = this.getMovementsTree();
-    this.exercises = this.getExercises();
   }
 
   getMovementsTree(): NzTreeNodeOptions[] {
@@ -46,10 +46,18 @@ export class AppComponent implements OnInit {
   }
 
   getDate(id: string): WorkoutDay {
-    return this.movementService.getDate(id);
+    return this.movementService.getWorkoutDay(id);
   }
 
-  getExercises(): Exercise[] {
-    return this.movementService.getExercises();
+  getExercises(date: Date): Exercise[] {
+    return this.movementService.getExercises(date);
+  }
+
+  hasExercise(date: Date): boolean {
+    return this.movementService.getDaysInMonth(date).some(value => value.date.getDate() === date.getDate());
+  }
+
+  onCalendarChange(date: Date): void {
+    this.exercises = this.movementService.getExercises(date);
   }
 }

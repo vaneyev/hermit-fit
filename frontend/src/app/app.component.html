@@ -1,5 +1,10 @@
 <nz-layout>
   <nz-content>
+    <nz-date-picker nzInline [nzDateRender]="cellTemp" [(ngModel)]="date" (ngModelChange)="onCalendarChange($event)">
+    </nz-date-picker>
+    <ng-template #cellTemp let-date>
+      <div class="ant-picker-cell-inner" [class.has-exercise]="hasExercise(date)">{{ date.getDate() }}</div>
+    </ng-template>
     <nz-tree-select
       style="width: 20em"
       nzShowSearch
@@ -9,31 +14,22 @@
     <nz-table [nzData]="exercises">
       <thead>
       <tr>
-        <th>
-          Date
-        </th>
-        <th>
+        <th scope="col">
           Exercise
         </th>
-        <th>
+        <th scope="col">
           Set
         </th>
-        <th>
+        <th scope="col">
           Reps
         </th>
-        <th>
+        <th scope="col">
           Work
-        </th>
-        <th>
-          Comments
         </th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let exercise of exercises">
-        <td>
-          {{ getDate(exercise.workoutDayId).date | date }}
-        </td>
         <td>
           {{ getMovement(exercise.movementId).title }}
         </td>
@@ -45,9 +41,6 @@
         </td>
         <td>
           {{ exercise.isWork }}
-        </td>
-        <td>
-          {{ getDate(exercise.workoutDayId).comments }}
         </td>
       </tr>
       </tbody>
