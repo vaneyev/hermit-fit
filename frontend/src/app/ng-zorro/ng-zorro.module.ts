@@ -5,6 +5,8 @@ import {NzTableModule} from 'ng-zorro-antd/table';
 import {NzDatePickerModule} from 'ng-zorro-antd/date-picker';
 import {NzGridModule} from 'ng-zorro-antd/grid';
 import {NzInputModule} from 'ng-zorro-antd/input';
+import {NzButtonModule} from 'ng-zorro-antd/button';
+import {NzIconModule} from 'ng-zorro-antd/icon';
 
 @NgModule({
   exports: [
@@ -13,7 +15,9 @@ import {NzInputModule} from 'ng-zorro-antd/input';
     NzTableModule,
     NzDatePickerModule,
     NzGridModule,
-    NzInputModule
+    NzInputModule,
+    NzButtonModule,
+    NzIconModule
   ]
 })
 export class NgZorroModule { }

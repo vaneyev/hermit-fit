@@ -22,6 +22,7 @@
     <nz-row>
       <nz-col>
         <h2>Exercises:</h2>
+        <button nz-button><i nz-icon nzType="plus"></i></button>
         <ng-template #noResult></ng-template>
         <nz-table [nzData]="exercises" [nzShowPagination]="false" [nzNoResult]="noResult">
           <thead>
@@ -38,6 +39,9 @@
             <th scope="col">
               Work
             </th>
+            <th scope="col">
+
+            </th>
           </tr>
           </thead>
           <tbody>
@@ -53,6 +57,10 @@
             </td>
             <td>
               {{ exercise.isWork }}
+            </td>
+            <td>
+              <button nz-button><i nz-icon nzType="edit"></i></button>
+              <button nz-button><i nz-icon nzType="delete"></i></button>
             </td>
           </tr>
           </tbody>

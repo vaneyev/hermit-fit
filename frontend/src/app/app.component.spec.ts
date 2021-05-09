@@ -3,6 +3,15 @@ import {AppComponent} from './app.component';
 import {NgZorroModule} from './ng-zorro/ng-zorro.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {en_US, NZ_I18N} from 'ng-zorro-antd/i18n';
+import {IconDefinition} from '@ant-design/icons-angular';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+import {NZ_ICONS} from 'ng-zorro-antd/icon';
+
+const antDesignIcons = AllIcons as {
+  [key: string]: IconDefinition;
+};
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key]);
+
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -15,7 +24,8 @@ describe('AppComponent', () => {
         NgZorroModule
       ],
       providers: [
-        {provide: NZ_I18N, useValue: en_US}
+        {provide: NZ_I18N, useValue: en_US},
+        {provide: NZ_ICONS, useValue: icons},
       ]
     }).compileComponents();
   });
