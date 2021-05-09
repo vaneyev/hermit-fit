@@ -421,7 +421,7 @@ const days: WorkoutDay[] = [
   {
     id: '',
     date: new Date(2021, 4, 1),
-    comments: ''
+    comments: 'Some comment'
   }
 ];
 
@@ -469,6 +469,10 @@ export class MovementService {
   getDaysInMonth(date: Date): WorkoutDay[] {
     return days.filter(value =>
       value.date.getFullYear() === date.getFullYear() && value.date.getMonth() === date.getMonth());
+  }
+
+  getWorkoutDayByDate(date: Date): WorkoutDay {
+    return this.getDaysInMonth(date).find(value => value.date.getDate() === date.getDate());
   }
 
   getExercises(date: Date): Exercise[] {

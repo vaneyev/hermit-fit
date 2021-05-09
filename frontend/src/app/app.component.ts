@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   private movementService: MovementService;
   movementsTree: NzTreeNodeOptions[] = [];
   exercises: Exercise[] = [];
+  comments: string;
 
   constructor(movementService: MovementService) {
     this.movementService = movementService;
@@ -49,6 +50,7 @@ export class AppComponent implements OnInit {
   }
 
   onCalendarChange(date: Date): void {
+    this.comments = this.movementService.getWorkoutDayByDate(date)?.comments;
     this.exercises = this.movementService.getExercises(date);
   }
 }

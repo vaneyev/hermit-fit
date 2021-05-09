@@ -22,7 +22,7 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgZorroModule
+    NgZorroModule,
   ],
   providers: [
     {provide: NZ_I18N, useValue: en_US},

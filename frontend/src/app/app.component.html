@@ -1,49 +1,69 @@
 <nz-layout>
   <nz-content>
-    <nz-date-picker nzInline [nzDateRender]="cellTemp" [(ngModel)]="date" (ngModelChange)="onCalendarChange($event)">
-    </nz-date-picker>
-    <ng-template #cellTemp let-date>
-      <div class="ant-picker-cell-inner" [class.has-exercise]="hasExercise(date)">{{ date.getDate() }}</div>
-    </ng-template>
-    <nz-tree-select
-      style="width: 20em"
-      nzShowSearch
-      nzVirtualHeight="30em"
-      [nzNodes]="movementsTree">
-    </nz-tree-select>
-    <nz-table [nzData]="exercises">
-      <thead>
-      <tr>
-        <th scope="col">
-          Exercise
-        </th>
-        <th scope="col">
-          Set
-        </th>
-        <th scope="col">
-          Reps
-        </th>
-        <th scope="col">
-          Work
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let exercise of exercises">
-        <td>
-          {{ getMovement(exercise.movementId).title }}
-        </td>
-        <td>
-          {{ exercise.set }}
-        </td>
-        <td>
-          {{ exercise.reps }}
-        </td>
-        <td>
-          {{ exercise.isWork }}
-        </td>
-      </tr>
-      </tbody>
-    </nz-table>
+    <nz-row>
+      <nz-col>
+        <h2>Day:</h2>
+        <nz-date-picker nzInline [nzDateRender]="cellTemp" [(ngModel)]="date"
+                        (ngModelChange)="onCalendarChange($event)">
+        </nz-date-picker>
+        <ng-template #cellTemp let-date>
+          <div class="ant-picker-cell-inner" [class.has-exercise]="hasExercise(date)">{{ date.getDate() }}</div>
+        </ng-template>
+      </nz-col>
+      <nz-col>
+        <nz-tree-select
+          style="width: 20em"
+          nzShowSearch
+          nzVirtualHeight="30em"
+          [nzNodes]="movementsTree">
+        </nz-tree-select>
+      </nz-col>
+    </nz-row>
+    <nz-row>
+      <nz-col>
+        <h2>Exercises:</h2>
+        <ng-template #noResult></ng-template>
+        <nz-table [nzData]="exercises" [nzShowPagination]="false" [nzNoResult]="noResult">
+          <thead>
+          <tr>
+            <th scope="col">
+              Exercise
+            </th>
+            <th scope="col">
+              Set
+            </th>
+            <th scope="col">
+              Reps
+            </th>
+            <th scope="col">
+              Work
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let exercise of exercises">
+            <td>
+              {{ getMovement(exercise.movementId).title }}
+            </td>
+            <td>
+              {{ exercise.set }}
+            </td>
+            <td>
+              {{ exercise.reps }}
+            </td>
+            <td>
+              {{ exercise.isWork }}
+            </td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </nz-col>
+    </nz-row>
+    <nz-row>
+      <nz-col>
+        <h2>Comments:</h2>
+        <textarea nz-input rows="4" [(ngModel)]="comments"></textarea>
+      </nz-col>
+    </nz-row>
   </nz-content>
 </nz-layout>
