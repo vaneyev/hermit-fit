@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   movementsTree: NzTreeNodeOptions[] = [];
   exercises: Exercise[] = [];
   comments: string;
+  idModalVisible = false;
 
   constructor(movementService: MovementService) {
     this.movementService = movementService;
