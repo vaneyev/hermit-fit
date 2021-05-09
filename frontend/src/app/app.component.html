@@ -10,14 +10,16 @@
           <div class="ant-picker-cell-inner" [class.has-exercise]="hasExercise(date)">{{ date.getDate() }}</div>
         </ng-template>
       </nz-col>
-      <nz-col>
-        <nz-tree-select
-          style="width: 20em"
-          nzShowSearch
-          nzVirtualHeight="30em"
-          [nzNodes]="movementsTree">
-        </nz-tree-select>
-      </nz-col>
+      <nz-modal [(nzVisible)]="idModalVisible">
+        <ng-container>
+          <nz-tree-select
+            style="width: 20em"
+            nzShowSearch
+            nzVirtualHeight="30em"
+            [nzNodes]="movementsTree">
+          </nz-tree-select>
+        </ng-container>
+      </nz-modal>
     </nz-row>
     <nz-row>
       <nz-col>
