@@ -8,6 +8,9 @@ import {NzInputModule} from 'ng-zorro-antd/input';
 import {NzButtonModule} from 'ng-zorro-antd/button';
 import {NzIconModule} from 'ng-zorro-antd/icon';
 import {NzModalModule} from 'ng-zorro-antd/modal';
+import {NzSpaceModule} from 'ng-zorro-antd/space';
+import {NzInputNumberModule} from 'ng-zorro-antd/input-number';
+import {NzFormModule} from 'ng-zorro-antd/form';
 
 @NgModule({
   exports: [
@@ -19,7 +22,10 @@ import {NzModalModule} from 'ng-zorro-antd/modal';
     NzInputModule,
     NzButtonModule,
     NzIconModule,
-    NzModalModule
+    NzModalModule,
+    NzSpaceModule,
+    NzInputNumberModule,
+    NzFormModule
   ]
 })
 export class NgZorroModule { }
