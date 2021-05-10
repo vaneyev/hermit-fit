@@ -1,0 +1,11 @@
+<nz-modal [(nzVisible)]="visible" (nzOnCancel)="onPressCancel()" (nzOnOk)="onPressOk()">
+  <ng-container>
+    <nz-tree-select
+      style="width: 20em"
+      nzShowSearch
+      nzVirtualHeight="30em"
+      [nzNodes]="movementsTree">
+    </nz-tree-select>
+  </ng-container>
+</nz-modal>
+

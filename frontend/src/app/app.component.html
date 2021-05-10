@@ -3,28 +3,30 @@
     <nz-row>
       <nz-col>
         <h2>Day:</h2>
-        <nz-date-picker nzInline [nzDateRender]="cellTemp" [(ngModel)]="date"
-                        (ngModelChange)="onCalendarChange($event)">
+        <nz-date-picker
+          #datePicker
+          [nzAllowClear]="false"
+          [nzDateRender]="cellTemp"
+          [ngModel]="date"
+          (ngModelChange)="onCalendarChange($event)"
+        >
         </nz-date-picker>
         <ng-template #cellTemp let-date>
           <div class="ant-picker-cell-inner" [class.has-exercise]="hasExercise(date)">{{ date.getDate() }}</div>
         </ng-template>
       </nz-col>
-      <nz-modal [(nzVisible)]="idModalVisible">
-        <ng-container>
-          <nz-tree-select
-            style="width: 20em"
-            nzShowSearch
-            nzVirtualHeight="30em"
-            [nzNodes]="movementsTree">
-          </nz-tree-select>
-        </ng-container>
-      </nz-modal>
     </nz-row>
     <nz-row>
       <nz-col>
         <h2>Exercises:</h2>
-        <button nz-button><i nz-icon nzType="plus"></i></button>
+        <button nz-button (click)="onCreate()"><i nz-icon nzType="plus"></i></button>
+        <app-exercise-create-or-update-modal
+          [(exercise)]="exercise"
+          [visible]="isModalVisible"
+          (ok)="onOk()"
+          (cancel)="onCancel()"
+        >
+        </app-exercise-create-or-update-modal>
         <ng-template #noResult></ng-template>
         <nz-table [nzData]="exercises" [nzShowPagination]="false" [nzNoResult]="noResult">
           <thead>
@@ -61,7 +63,7 @@
               {{ exercise.isWork }}
             </td>
             <td>
-              <button nz-button><i nz-icon nzType="edit"></i></button>
+              <button nz-button (click)="onUpdate(exercise)"><i nz-icon nzType="edit"></i></button>
               <button nz-button><i nz-icon nzType="delete"></i></button>
             </td>
           </tr>

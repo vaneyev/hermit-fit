@@ -13,6 +13,7 @@ import {NgZorroModule} from './ng-zorro/ng-zorro.module';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import {NZ_ICONS} from 'ng-zorro-antd/icon';
+import { ExerciseCreateOrUpdateModalComponent } from './exercise-create-or-update-modal/exercise-create-or-update-modal.component';
 
 registerLocaleData(en);
 
@@ -24,6 +25,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
 @NgModule({
   declarations: [
     AppComponent,
+    ExerciseCreateOrUpdateModalComponent,
   ],
   imports: [
     BrowserModule,

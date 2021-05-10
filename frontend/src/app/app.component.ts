@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Exercise, Movement, MovementService} from './movement.service';
-import {NzTreeNodeOptions} from 'ng-zorro-antd/tree';
+import {NzDatePickerComponent} from 'ng-zorro-antd/date-picker';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-root',
@@ -9,49 +10,61 @@ import {NzTreeNodeOptions} from 'ng-zorro-antd/tree';
 })
 export class AppComponent implements OnInit {
   date: Date;
-  title = 'Hermit Fit';
   private movementService: MovementService;
-  movementsTree: NzTreeNodeOptions[] = [];
   exercises: Exercise[] = [];
+  exercise: Exercise;
   comments: string;
-  idModalVisible = false;
+  isModalVisible = false;
+  @ViewChild('datePicker')
+  datePicker: NzDatePickerComponent;
 
   constructor(movementService: MovementService) {
     this.movementService = movementService;
   }
 
   ngOnInit(): void {
-    this.movementsTree = this.getMovementsTree();
-  }
-
-  getMovementsTree(): NzTreeNodeOptions[] {
-    return this.movementService.getMovementsTypes()
-      .map<NzTreeNodeOptions>((value) => {
-        return {
-          title: value.title,
-          key: value.key,
-          selectable: false,
-          children: this.movementService.getMovements(value.key)
-            .map<NzTreeNodeOptions>(child => {
-              return {
-                title: child.title,
-                key: child.key,
-                isLeaf: true
-              };
-            })
-        };
-      });
+    this.onCalendarChange(new Date());
   }
 
   getMovement(key: string): Movement {
     return this.movementService.getMovement(key);
   }
+
   hasExercise(date: Date): boolean {
     return this.movementService.getDaysInMonth(date).some(value => value.date.getDate() === date.getDate());
   }
 
   onCalendarChange(date: Date): void {
+    this.date = date;
+    if (!date) {
+      this.comments = undefined;
+      this.exercises = [];
+    }
     this.comments = this.movementService.getWorkoutDayByDate(date)?.comments;
     this.exercises = this.movementService.getExercises(date);
+  }
+
+  onCreate(): void {
+    this.onUpdate({
+      id: uuidv4(),
+      workoutDayId: '',
+      movementId: '',
+      isWork: true,
+      set: 1,
+      reps: 0
+    });
+  }
+
+  onUpdate(exercise: Exercise): void {
+    this.exercise = exercise;
+    this.isModalVisible = true;
+  }
+
+  onOk(): void {
+    this.isModalVisible = false;
+  }
+
+  onCancel(): void {
+    this.isModalVisible = false;
   }
 }
