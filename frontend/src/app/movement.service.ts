@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {v4 as uuidv4} from 'uuid';
 
 interface MovementType {
   readonly key: string;
@@ -473,6 +474,18 @@ export class MovementService {
 
   getWorkoutDayByDate(date: Date): WorkoutDay {
     return this.getDaysInMonth(date).find(value => value.date.getDate() === date.getDate());
+  }
+
+  createWorkoutDayIfAbsent(date: Date): WorkoutDay {
+    let workoutDay = this.getWorkoutDayByDate(date);
+    if (!workoutDay) {
+      workoutDay = {
+        id: uuidv4(),
+        date,
+        comments: ''
+      };
+    }
+    return {...workoutDay};
   }
 
   getExercises(date: Date): Exercise[] {

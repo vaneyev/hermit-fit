@@ -14,8 +14,6 @@ export class ExerciseCreateOrUpdateModalComponent implements OnInit {
 
   @Output() exerciseChange = new EventEmitter<Exercise>();
 
-  @Output() ok: EventEmitter<any> = new EventEmitter<any>();
-
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
 
   private movementService: MovementService;
@@ -30,11 +28,11 @@ export class ExerciseCreateOrUpdateModalComponent implements OnInit {
     this.movementsTree = this.getMovementsTree();
   }
 
-  onPressOk(): void {
-    this.ok.emit();
+  handleOk(): void {
+    this.exerciseChange.emit(this.exercise);
   }
 
-  onPressCancel(): void {
+  handleCancel(): void {
     this.cancel.emit();
   }
 

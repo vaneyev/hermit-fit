@@ -1,81 +1,71 @@
 <nz-layout>
   <nz-content>
-    <nz-row>
-      <nz-col>
-        <h2>Day:</h2>
-        <nz-date-picker
-          #datePicker
-          [nzAllowClear]="false"
-          [nzDateRender]="cellTemp"
-          [ngModel]="date"
-          (ngModelChange)="onCalendarChange($event)"
-        >
-        </nz-date-picker>
-        <ng-template #cellTemp let-date>
-          <div class="ant-picker-cell-inner" [class.has-exercise]="hasExercise(date)">{{ date.getDate() }}</div>
-        </ng-template>
-      </nz-col>
-    </nz-row>
-    <nz-row>
-      <nz-col>
-        <h2>Exercises:</h2>
-        <button nz-button (click)="onCreate()"><i nz-icon nzType="plus"></i></button>
-        <app-exercise-create-or-update-modal
-          [(exercise)]="exercise"
-          [visible]="isModalVisible"
-          (ok)="onOk()"
-          (cancel)="onCancel()"
-        >
-        </app-exercise-create-or-update-modal>
-        <ng-template #noResult></ng-template>
-        <nz-table [nzData]="exercises" [nzShowPagination]="false" [nzNoResult]="noResult">
-          <thead>
-          <tr>
-            <th scope="col">
-              Exercise
-            </th>
-            <th scope="col">
-              Set
-            </th>
-            <th scope="col">
-              Reps
-            </th>
-            <th scope="col">
-              Work
-            </th>
-            <th scope="col">
+    <nz-space nzDirection="vertical">
+      <nz-date-picker
+        #datePicker
+        *nzSpaceItem
+        [nzAllowClear]="false"
+        [nzDateRender]="cellTemp"
+        [ngModel]="date"
+        (ngModelChange)="onCalendarChange($event)"
+      >
+      </nz-date-picker>
+      <ng-template #cellTemp let-date>
+        <div class="ant-picker-cell-inner" [class.has-exercise]="hasExercise(date)">{{ date.getDate() }}</div>
+      </ng-template>
+      <button *nzSpaceItem nz-button (click)="onCreate()"><i nz-icon nzType="plus"></i></button>
+      <app-exercise-create-or-update-modal
+        [exercise]="exercise"
+        [visible]="isModalVisible"
+        (exerciseChange)="onExerciseChange($event)"
+        (cancel)="onCancel()"
+      >
+      </app-exercise-create-or-update-modal>
+      <ng-template #noResult></ng-template>
+      <nz-table *nzSpaceItem [nzData]="exercises" [nzShowPagination]="false" [nzNoResult]="noResult">
+        <thead>
+        <tr>
+          <th scope="col">
+            Exercise
+          </th>
+          <th scope="col">
+            Set
+          </th>
+          <th scope="col">
+            Reps
+          </th>
+          <th scope="col">
+            Work
+          </th>
+          <th scope="col">
 
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let exercise of exercises">
-            <td>
-              {{ getMovement(exercise.movementId).title }}
-            </td>
-            <td>
-              {{ exercise.set }}
-            </td>
-            <td>
-              {{ exercise.reps }}
-            </td>
-            <td>
-              {{ exercise.isWork }}
-            </td>
-            <td>
-              <button nz-button (click)="onUpdate(exercise)"><i nz-icon nzType="edit"></i></button>
-              <button nz-button><i nz-icon nzType="delete"></i></button>
-            </td>
-          </tr>
-          </tbody>
-        </nz-table>
-      </nz-col>
-    </nz-row>
-    <nz-row>
-      <nz-col>
-        <h2>Comments:</h2>
-        <textarea nz-input rows="4" [(ngModel)]="comments"></textarea>
-      </nz-col>
-    </nz-row>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let exercise of exercises">
+          <td>
+            {{ getMovement(exercise.movementId).title }}
+          </td>
+          <td>
+            {{ exercise.set }}
+          </td>
+          <td>
+            {{ exercise.reps }}
+          </td>
+          <td>
+            {{ exercise.isWork }}
+          </td>
+          <td>
+            <nz-space>
+              <button *nzSpaceItem nz-button (click)="onUpdate(exercise)"><i nz-icon nzType="edit"></i></button>
+              <button *nzSpaceItem nz-button><i nz-icon nzType="delete"></i></button>
+            </nz-space>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+      <textarea *nzSpaceItem nz-input rows="4" [(ngModel)]="comments"></textarea>
+    </nz-space>
   </nz-content>
 </nz-layout>

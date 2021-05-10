@@ -1,11 +1,21 @@
-<nz-modal [(nzVisible)]="visible" (nzOnCancel)="onPressCancel()" (nzOnOk)="onPressOk()">
-  <ng-container>
+<nz-modal [(nzVisible)]="visible" (nzOnCancel)="handleCancel()">
+  <nz-space *nzModalContent nzDirection="vertical">
     <nz-tree-select
+      *nzSpaceItem
       style="width: 20em"
       nzShowSearch
       nzVirtualHeight="30em"
-      [nzNodes]="movementsTree">
-    </nz-tree-select>
-  </ng-container>
+      [nzNodes]="movementsTree"
+      [(ngModel)]="exercise.movementId"
+    ></nz-tree-select>
+    <nz-input-number
+      [(ngModel)]="exercise.reps"
+      *nzSpaceItem
+    ></nz-input-number>
+  </nz-space>
+  <nz-space *nzModalFooter>
+    <button *nzSpaceItem nz-button (click)="handleCancel()">Cancel</button>
+    <button *nzSpaceItem nz-button (click)="handleOk()" nzType="primary">Ok</button>
+  </nz-space>
 </nz-modal>
 

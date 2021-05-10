@@ -45,9 +45,10 @@ export class AppComponent implements OnInit {
   }
 
   onCreate(): void {
+    const workoutDay = this.movementService.createWorkoutDayIfAbsent(this.date);
     this.onUpdate({
       id: uuidv4(),
-      workoutDayId: '',
+      workoutDayId: workoutDay.id,
       movementId: '',
       isWork: true,
       set: 1,
@@ -56,11 +57,12 @@ export class AppComponent implements OnInit {
   }
 
   onUpdate(exercise: Exercise): void {
-    this.exercise = exercise;
+    this.exercise = {...exercise};
     this.isModalVisible = true;
   }
 
-  onOk(): void {
+  onExerciseChange(exercise: Exercise): void {
+    this.exercise = exercise;
     this.isModalVisible = false;
   }
 
